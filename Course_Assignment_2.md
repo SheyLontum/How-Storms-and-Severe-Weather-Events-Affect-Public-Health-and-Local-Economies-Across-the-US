@@ -12,7 +12,11 @@ pandoc_args: [
 
 ## Synopsis
 
-Storms and other severe weather events can cause both public health and economic problems for communities and municipalities. Many severe events can result in fatalities, injuries, and property damage, and preventing such outcomes to the extent possible is a key concern for authorities. This study seeks to assist in this effort by identifying the weather events that are most harmful to public health and the economy. Using data from the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database, I show that Tornados and Lightening are by far the most responsible weather events for injuries and are also the identifiable events most responsible for fatalities in the United States. I also find that floods, tornados, and hail are most responsible for property and crop damages in the United States over the same period. Anyone who seeks to reproduce this project can find all the code and data on my GitHub Repository.
+Storms and other severe weather events can cause both public health and economic problems for communities and municipalities. Many severe events can result in fatalities, injuries, and property damage, and preventing such outcomes to the extent possible is a key concern for authorities. This study seeks to assist in this effort by identifying the weather events that are most harmful to public health and the economy.
+
+Using data from the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database, I show that Tornados and Lightening are by far the most responsible weather events for injuries and are also the identifiable events most responsible for fatalities in the United States. I also find that floods, tornados, and hail are most responsible for property and crop damages in the United States over the same period.
+
+Anyone who seeks to reproduce this project can find all the code and data on my [GitHub Repository.](https://github.com/SheyLontum/How-Storms-and-Severe-Weather-Events-Affect-Public-Health-and-Local-Economies-Across-the-US)
 
 - - -
 
@@ -53,8 +57,8 @@ colSums(is.na(data))
 ```
 
 ```
-    EVTYPE FATALITIES   INJURIES    PROPDMG PROPDMGEXP    CROPDMG CROPDMGEXP 
-         0          0          0          0          0          0          0 
+##     EVTYPE FATALITIES   INJURIES    PROPDMG PROPDMGEXP    CROPDMG CROPDMGEXP 
+##          0          0          0          0          0          0          0
 ```
 
 ## Tidying Values
@@ -68,21 +72,21 @@ sort(table(data$EVTYPE), decreasing = TRUE)[1:20]
 ```
 
 ```
-
-                    HAIL                TSTM WIND        THUNDERSTORM WIND 
-                  288661                   219940                    82563 
-                 TORNADO              FLASH FLOOD                    FLOOD 
-                   60652                    54277                    25326 
-      THUNDERSTORM WINDS                HIGH WIND                LIGHTNING 
-                   20843                    20212                    15754 
-              HEAVY SNOW               HEAVY RAIN             WINTER STORM 
-                   15708                    11723                    11433 
-          WINTER WEATHER             FUNNEL CLOUD         MARINE TSTM WIND 
-                    7026                     6839                     6175 
-MARINE THUNDERSTORM WIND               WATERSPOUT              STRONG WIND 
-                    5812                     3796                     3566 
-    URBAN/SML STREAM FLD                 WILDFIRE 
-                    3392                     2761 
+## 
+##                     HAIL                TSTM WIND        THUNDERSTORM WIND 
+##                   288661                   219940                    82563 
+##                  TORNADO              FLASH FLOOD                    FLOOD 
+##                    60652                    54277                    25326 
+##       THUNDERSTORM WINDS                HIGH WIND                LIGHTNING 
+##                    20843                    20212                    15754 
+##               HEAVY SNOW               HEAVY RAIN             WINTER STORM 
+##                    15708                    11723                    11433 
+##           WINTER WEATHER             FUNNEL CLOUD         MARINE TSTM WIND 
+##                     7026                     6839                     6175 
+## MARINE THUNDERSTORM WIND               WATERSPOUT              STRONG WIND 
+##                     5812                     3796                     3566 
+##     URBAN/SML STREAM FLD                 WILDFIRE 
+##                     3392                     2761
 ```
 
 ```r
@@ -129,11 +133,11 @@ sort(table(data$EVTYPE), decreasing = TRUE)[1:7]
 ```
 
 ```
-
-          WIND           HAIL          FLOOD        TORNADO WINTER WEATHER 
-        364342         289276          81841          60684          19596 
-     LIGHTNING     HEAVY SNOW 
-         15759          15708 
+## 
+##           WIND           HAIL          FLOOD        TORNADO WINTER WEATHER 
+##         364342         289276          81841          60684          19596 
+##      LIGHTNING     HEAVY SNOW 
+##          15759          15708
 ```
 
 ```r
@@ -156,11 +160,11 @@ sort(table(data$PROPDMGEXP), decreasing = TRUE)
 ```
 
 ```
-
-            K      M      0      B      5      1      2      ?      m      H 
-465934 424665  11330    216     40     28     25     13      8      7      6 
-     +      7      3      4      6      -      8      h 
-     5      5      4      4      4      1      1      1 
+## 
+##             K      M      0      B      5      1      2      ?      m      H 
+## 465934 424665  11330    216     40     28     25     13      8      7      6 
+##      +      7      3      4      6      -      8      h 
+##      5      5      4      4      4      1      1      1
 ```
 
 ```r
@@ -185,9 +189,9 @@ sort(table(data$CROPDMGEXP), decreasing = TRUE)
 ```
 
 ```
-
-            K      M      k      0      B      ?      2      m 
-618413 281832   1994     21     19      9      7      1      1 
+## 
+##             K      M      k      0      B      ?      2      m 
+## 618413 281832   1994     21     19      9      7      1      1
 ```
 
 ```r
@@ -223,6 +227,26 @@ In this section, I will explore the data to find out which types of weather even
 ```r
 # load dplyr library
 library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
 # generate average number of injuries and fatalities for each category of weather event
 health <- data %>%
 group_by(EVTYPE) %>%
@@ -230,7 +254,7 @@ summarise(AverageInjuries = mean(INJURIES), AverageFatalities = mean(FATALITIES)
 ```
 
 ```
-`summarise()` ungrouping output (override with `.groups` argument)
+## `summarise()` ungrouping output (override with `.groups` argument)
 ```
 
 ```r
@@ -270,7 +294,7 @@ summarise(AveragePropertyDammage = mean(Property.Damage), AverageCropDamage = me
 ```
 
 ```
-`summarise()` ungrouping output (override with `.groups` argument)
+## `summarise()` ungrouping output (override with `.groups` argument)
 ```
 
 ```r
@@ -281,7 +305,7 @@ econ2 <- data.frame(Event = economy$EVTYPE, Type = "Crop Damage", Effect = econo
 # combine average property and crop dammage data frames into one
 EconomicEffects <- rbind(econ1, econ2)
 # generate basic esthetics for mapping coordinates of the plot
-EconomicPlot <- ggplot(EconomicEffects, aes(Event, Effect, fill = Type)) +
+EconomicPlot <- ggplot(EconomicEffects, aes(Event, log(Effect), fill = Type)) +
 # Add bar graphs to the plot
 geom_bar(stat = "identity") +
 # Add labels to the plot

@@ -12,7 +12,11 @@ pandoc_args: [
 
 ## Synopsis
 
-Storms and other severe weather events can cause both public health and economic problems for communities and municipalities. Many severe events can result in fatalities, injuries, and property damage, and preventing such outcomes to the extent possible is a key concern for authorities. This study seeks to assist in this effort by identifying the weather events that are most harmful to public health and the economy. Using data from the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database, I show that Tornados and Lightening are by far the most responsible weather events for injuries and are also the identifiable events most responsible for fatalities in the United States. I also find that floods, tornados, and hail are most responsible for property and crop damages in the United States over the same period. Anyone who seeks to reproduce this project can find all the code and data on my GitHub Repository.
+Storms and other severe weather events can cause both public health and economic problems for communities and municipalities. Many severe events can result in fatalities, injuries, and property damage, and preventing such outcomes to the extent possible is a key concern for authorities. This study seeks to assist in this effort by identifying the weather events that are most harmful to public health and the economy.
+
+Using data from the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database, I show that Tornados and Lightening are by far the most responsible weather events for injuries and are also the identifiable events most responsible for fatalities in the United States. I also find that floods, tornados, and hail are most responsible for property and crop damages in the United States over the same period.
+
+Anyone who seeks to reproduce this project can find all the code and data on my [GitHub Repository.](https://github.com/SheyLontum/How-Storms-and-Severe-Weather-Events-Affect-Public-Health-and-Local-Economies-Across-the-US)
 
 - - -
 
@@ -195,7 +199,7 @@ econ2 <- data.frame(Event = economy$EVTYPE, Type = "Crop Damage", Effect = econo
 # combine average property and crop dammage data frames into one
 EconomicEffects <- rbind(econ1, econ2)
 # generate basic esthetics for mapping coordinates of the plot
-EconomicPlot <- ggplot(EconomicEffects, aes(Event, Effect, fill = Type)) +
+EconomicPlot <- ggplot(EconomicEffects, aes(Event, log(Effect), fill = Type)) +
 # Add bar graphs to the plot
 geom_bar(stat = "identity") +
 # Add labels to the plot
